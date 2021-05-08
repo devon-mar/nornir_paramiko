@@ -148,6 +148,7 @@ def paramiko_sftp(
         src: source file
         dst: destination
         action: ``put``, ``get``.
+        compare: Compare the src and dst file using ``sha1sum``.
 
     Returns:
         :class:`Result` object with the following attributes set:
