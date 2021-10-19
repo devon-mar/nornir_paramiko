@@ -27,7 +27,7 @@ def get_src_hash(filename: str) -> str:
 def get_dst_hash(task: Task, filename: str) -> str:
     command = "sha1sum {}".format(filename)
     try:
-        result = paramiko_command.remote_command(task, command)
+        result = paramiko_command(task, command)
         if result.stdout is not None:
             return result.stdout.split()[0]
 
