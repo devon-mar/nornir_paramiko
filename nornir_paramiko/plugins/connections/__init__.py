@@ -48,12 +48,13 @@ class Paramiko:
         }
 
         user_config = ssh_config.lookup(hostname)
-        for k in ("hostname", "user", "port"):
+
+        for k in ("hostname",  "port"):
             if k in user_config:
-                if k == "user":
-                    parameters["username"] = user_config["user"]
-                else:
                     parameters[k] = user_config[k]
+        if "user" in user_config:
+            parameters["username"] = user_config["user"]
+
 
         if "proxycommand" in user_config:
             parameters["sock"] = paramiko.ProxyCommand(user_config["proxycommand"])
