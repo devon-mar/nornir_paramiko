@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nornir_paramiko"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = ["Devon Mar <devonm@mdmm.ca>"]
 
