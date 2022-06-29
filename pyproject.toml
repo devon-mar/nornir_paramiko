@@ -8,7 +8,7 @@ authors = ["Devon Mar <devonm@mdmm.ca>"]
 "paramiko" = "nornir_paramiko.plugins.connections:Paramiko"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.7"
 paramiko = "^2.7"
 nornir = "^3.0.0"
 scp = "^0.13.3"
