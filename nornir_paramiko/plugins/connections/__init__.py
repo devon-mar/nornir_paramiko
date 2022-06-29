@@ -26,20 +26,22 @@ class Paramiko:
         extras: Optional[Dict[str, Any]] = None,
         configuration: Optional[Config] = None,
     ) -> None:
+        if hostname is None:
+            raise ValueError("hostname must not be none")
+
         extras = extras or {}
 
         port = port or 22
 
         client = paramiko.SSHClient()
-        client._policy = paramiko.WarningPolicy()
-        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy)
 
         ssh_config = paramiko.SSHConfig()
         ssh_config_file = configuration.ssh.config_file  # type: ignore
         if os.path.exists(ssh_config_file):
             with open(ssh_config_file) as f:
                 ssh_config.parse(f)
-        parameters = {
+        parameters: Dict[str, Any] = {
             "hostname": hostname,
             "username": username,
             "password": password,

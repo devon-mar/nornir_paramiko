@@ -17,10 +17,10 @@ def get_src_hash(filename: str) -> str:
     sha1sum = hashlib.sha1()
 
     with open(filename, "rb") as f:
-        block = f.read(2 ** 16)
+        block = f.read(2**16)
         while len(block) != 0:
             sha1sum.update(block)
-            block = f.read(2 ** 16)
+            block = f.read(2**16)
     return sha1sum.hexdigest()
 
 
@@ -76,7 +76,9 @@ def compare_get_files(
     task: Task, sftp_client: paramiko.SFTPClient, src: str, dst: str
 ) -> List[str]:
     changed = []
-    if stat.S_ISREG(sftp_client.stat(src).st_mode):
+    st_mode = sftp_client.stat(src).st_mode
+    assert st_mode is not None
+    if stat.S_ISREG(st_mode):
         # is a file
         src_hash = get_dst_hash(task, src)
         try:
@@ -170,6 +172,7 @@ def paramiko_sftp(
     client = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
     scp_client = SCPClient(client.get_transport())
     sftp_client = paramiko.SFTPClient.from_transport(client.get_transport())
+    assert sftp_client is not None
     files_changed = actions[action](
         task, scp_client, sftp_client, src, dst, dry_run, compare
     )
