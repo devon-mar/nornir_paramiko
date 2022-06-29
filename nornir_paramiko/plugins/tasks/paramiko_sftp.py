@@ -3,14 +3,14 @@ import os
 import stat
 from typing import List, Optional
 
-from nornir.core.task import Result, Task
-from nornir_paramiko.plugins.connections import CONNECTION_NAME
-from nornir_paramiko.exceptions import CommandError
-from .paramiko_command import paramiko_command
-
 import paramiko
-
+from nornir.core.task import Result, Task
 from scp import SCPClient
+
+from nornir_paramiko.exceptions import CommandError
+from nornir_paramiko.plugins.connections import CONNECTION_NAME
+
+from .paramiko_command import paramiko_command
 
 
 def get_src_hash(filename: str) -> str:

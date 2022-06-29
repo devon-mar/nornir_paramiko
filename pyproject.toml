@@ -8,7 +8,7 @@ authors = ["Devon Mar <devonm@mdmm.ca>"]
 "paramiko" = "nornir_paramiko.plugins.connections:Paramiko"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.7.2"
 paramiko = "^2.7"
 nornir = "^3.0.0"
 scp = "^0.13.3"
@@ -19,7 +19,12 @@ Sphinx = "^4.5.0"
 sphinx-rtd-theme = "^1.0.0"
 sphinx-autodoc-typehints = "^1.18.3"
 black = "^22.6.0"
+pylint = "^2.14.3"
+isort = "^5.10.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"

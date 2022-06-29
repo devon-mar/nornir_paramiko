@@ -1,6 +1,7 @@
 from nornir.core.task import Result, Task
-from nornir_paramiko.plugins.connections import CONNECTION_NAME
+
 from nornir_paramiko.exceptions import CommandError
+from nornir_paramiko.plugins.connections import CONNECTION_NAME
 
 
 def paramiko_command(task: Task, command: str) -> Result:

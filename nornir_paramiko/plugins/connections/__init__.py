@@ -1,9 +1,8 @@
 import os
 from typing import Any, Dict, Optional
 
-from nornir.core.configuration import Config
-
 import paramiko
+from nornir.core.configuration import Config
 
 CONNECTION_NAME = "paramiko"
 
