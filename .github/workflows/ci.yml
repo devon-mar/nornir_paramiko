@@ -35,6 +35,8 @@ jobs:
         run: poetry install
         if: steps.cache-poetry-dependencies.outputs.cache-hit != 'true'
 
+      - uses: psf/black@stable
+
       # https://github.com/PyCQA/flake8/pull/1438
       - name: Install flake8
         run: |
