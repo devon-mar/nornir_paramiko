@@ -1,7 +1,7 @@
 import hashlib
 import os
 import stat
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import paramiko
 from nornir.core.task import Result, Task
@@ -136,7 +136,7 @@ def paramiko_sftp(
     task: Task,
     src: str,
     dst: str,
-    action: str,
+    action: Literal["get", "put"],
     dry_run: Optional[bool] = None,
     compare: bool = True,
 ) -> Result:
