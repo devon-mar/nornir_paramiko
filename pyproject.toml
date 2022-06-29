@@ -11,7 +11,7 @@ authors = ["Devon Mar <devonm@mdmm.ca>"]
 python = "^3.7.2"
 paramiko = "^2.7"
 nornir = "^3.0.0"
-scp = "^0.13.3"
+scp = ">=0.13.3,<0.15.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
