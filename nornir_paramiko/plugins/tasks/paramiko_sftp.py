@@ -103,7 +103,7 @@ def get(
     src: str,
     dst: str,
     dry_run: Optional[bool] = None,
-    compare: bool = True
+    compare: bool = True,
 ) -> List[str]:
     if compare is True:
         changed = compare_get_files(task, sftp_client, src, dst)
@@ -121,7 +121,7 @@ def put(
     src: str,
     dst: str,
     dry_run: Optional[bool] = None,
-    compare: bool = True
+    compare: bool = True,
 ) -> List[str]:
     if compare is True:
         changed = compare_put_files(task, sftp_client, src, dst)
@@ -138,7 +138,7 @@ def paramiko_sftp(
     dst: str,
     action: str,
     dry_run: Optional[bool] = None,
-    compare: bool = True
+    compare: bool = True,
 ) -> Result:
     """
     Transfer files from/to the device using sftp protocol
@@ -170,7 +170,9 @@ def paramiko_sftp(
     client = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
     scp_client = SCPClient(client.get_transport())
     sftp_client = paramiko.SFTPClient.from_transport(client.get_transport())
-    files_changed = actions[action](task, scp_client, sftp_client, src, dst, dry_run, compare)
+    files_changed = actions[action](
+        task, scp_client, sftp_client, src, dst, dry_run, compare
+    )
     return Result(
         host=task.host, changed=bool(files_changed), files_changed=files_changed
     )
