@@ -34,4 +34,4 @@ def nr_dry_run():
 
 
 def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
-    metafunc.parametrize("host", ("password",))
+    metafunc.parametrize("host", ("password", "key"))

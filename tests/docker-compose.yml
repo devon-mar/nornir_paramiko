@@ -9,3 +9,11 @@ services:
       USER_PASSWORD: "test"
     ports:
       - 2222:2222
+  key:
+    image: linuxserver/openssh-server:latest
+    environment:
+      PASSWORD_ACCESS: "false"
+      USER_NAME: "test"
+      PUBLIC_KEY: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEq2cLqs++uwJh6xLTy4nX20UDfbgb6cDZl2nNkJEKud
+    ports:
+      - 2223:2222

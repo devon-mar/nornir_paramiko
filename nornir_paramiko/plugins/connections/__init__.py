@@ -59,9 +59,6 @@ class Paramiko:
         if "proxycommand" in user_config:
             parameters["sock"] = paramiko.ProxyCommand(user_config["proxycommand"])
 
-        # TODO configurable
-        #  if ssh_key_file:
-        #      parameters['key_filename'] = ssh_key_file
         if "identityfile" in user_config:
             parameters["key_filename"] = user_config["identityfile"]
 
