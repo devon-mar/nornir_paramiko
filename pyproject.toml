@@ -22,7 +22,7 @@ black = "^22.6.0"
 pylint = "^2.14.4"
 isort = "^5.10.1"
 mypy = "^0.961"
-types-paramiko = "^2.11.1"
+types-paramiko = "^2.11.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
