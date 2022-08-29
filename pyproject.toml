@@ -19,7 +19,7 @@ Sphinx = "^5.1.1"
 sphinx-rtd-theme = "^1.0.0"
 sphinx-autodoc-typehints = { version = "^1.19.2", python = "^3.7" }
 black = { version = "^22.6.0", python = "^3.7" }
-pylint = { version = "^2.14.5", python = "^3.7.2" }
+pylint = { version = "^2.15.0", python = "^3.7.2" }
 isort = { version = "^5.10.1", python = "^3.7" }
 mypy = "^0.971"
 types-paramiko = "^2.11.3"
