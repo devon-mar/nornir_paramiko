@@ -722,7 +722,7 @@ python-versions = "*"
 
 [[package]]
 name = "types-paramiko"
-version = "2.11.5"
+version = "2.11.6"
 description = "Typing stubs for paramiko"
 category = "dev"
 optional = false
@@ -775,7 +775,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=4.6)", "pytest-black (
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "0b40d26ffa2a3b39419633ea7d87ed293aa2d8eee285e7a2319a0196dcf94215"
+content-hash = "51304f9769edcff9da9aea9f02cfb354967a900d5fb0026c1f590fb6739e6b9a"
 
 [metadata.files]
 alabaster = [
@@ -1308,8 +1308,8 @@ types-cryptography = [
     {file = "types_cryptography-3.3.21-py3-none-any.whl", hash = "sha256:bdeb6dd07280ac724e05f02e0d8ef01fdef729b18bb07d635d64de83171a4e70"},
 ]
 types-paramiko = [
-    {file = "types-paramiko-2.11.5.tar.gz", hash = "sha256:013eb40f7929fef5dad2b73b40a4e2b42b7b8d09a720a6ac358e7e66539419d9"},
-    {file = "types_paramiko-2.11.5-py3-none-any.whl", hash = "sha256:08127a205b2a8f70dea04f0cfa256a7a82037f82d86c12e8db339d35cabd6f5b"},
+    {file = "types-paramiko-2.11.6.tar.gz", hash = "sha256:cfc9f12047bcf5cfaa6b7a5ad9d777d41ff4fe04ca2bb9bcf55c88dff02037e5"},
+    {file = "types_paramiko-2.11.6-py3-none-any.whl", hash = "sha256:9d6adb74a645c28e01e8539b218e8b8a4bab0b73925c60aca35993cc87f7d5a0"},
 ]
 typing-extensions = [
     {file = "typing_extensions-3.10.0.2-py2-none-any.whl", hash = "sha256:d8226d10bc02a29bcc81df19a26e56a9647f8b0a6d4a83924139f4a8b01f17b7"},
