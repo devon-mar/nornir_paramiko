@@ -81,6 +81,21 @@ jobs:
         run: docker-compose up -d
         working-directory: tests
 
+      - name: Wait for containers to start
+        run: |
+          SSH_PORTS="2222 2223"
+          for p in $SSH_PORTS; do
+            echo "::group::Wait for container $p to start"
+            for i in {1..20}; do ssh-keyscan -p $p localhost && break || echo -e "\033[0;33mNot started yet ($i)\033[0m" && sleep 1; done
+            if ! ssh-keyscan -p $p localhost; then
+                echo "::error container $p failed to start."
+                docker-compose logs
+                exit $CURL_RET
+            fi
+            echo -e "\033[0;32mSSH Container $p started\033[0m"
+            echo "::endgroup::"
+          done
+
       - name: Run tests
         run: poetry run pytest -v tests
 
