@@ -101,13 +101,13 @@ def compare_get_files(
 def get(
     task: Task,
     scp_client: SCPClient,
-    sftp_client: paramiko.SFTPClient,
+    sftp_client: Optional[paramiko.SFTPClient],
     src: str,
     dst: str,
     dry_run: Optional[bool] = None,
     compare: bool = True,
 ) -> List[str]:
-    if compare is True:
+    if compare is True and not sftp_client is None:
         changed = compare_get_files(task, sftp_client, src, dst)
     else:
         changed = [dst]
@@ -171,7 +171,10 @@ def paramiko_sftp(
     actions = {"put": put, "get": get}
     client = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
     scp_client = SCPClient(client.get_transport())
-    sftp_client = paramiko.SFTPClient.from_transport(client.get_transport())
+    try:
+        sftp_client = paramiko.SFTPClient.from_transport(client.get_transport())
+    except paramiko.ssh_exception.SSHException:
+        sftp_client = None
     assert sftp_client is not None
     files_changed = actions[action](
         task, scp_client, sftp_client, src, dst, dry_run, compare
