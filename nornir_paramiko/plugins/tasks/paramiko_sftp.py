@@ -101,13 +101,12 @@ def compare_get_files(
 def get(
     task: Task,
     scp_client: SCPClient,
-    sftp_client: paramiko.SFTPClient,
+    sftp_client: Optional[paramiko.SFTPClient],
     src: str,
     dst: str,
     dry_run: Optional[bool] = None,
-    compare: bool = True,
 ) -> List[str]:
-    if compare is True:
+    if sftp_client is not None:
         changed = compare_get_files(task, sftp_client, src, dst)
     else:
         changed = [dst]
@@ -119,13 +118,12 @@ def get(
 def put(
     task: Task,
     scp_client: SCPClient,
-    sftp_client: paramiko.SFTPClient,
+    sftp_client: Optional[paramiko.SFTPClient],
     src: str,
     dst: str,
     dry_run: Optional[bool] = None,
-    compare: bool = True,
 ) -> List[str]:
-    if compare is True:
+    if sftp_client is not None:
         changed = compare_put_files(task, sftp_client, src, dst)
     else:
         changed = [src]
@@ -151,6 +149,7 @@ def paramiko_sftp(
         dst: destination
         action: ``put``, ``get``.
         compare: Compare the src and dst file using ``sha1sum``.
+            This requires the host to support SFTP.
 
     Returns:
         :class:`Result` object with the following attributes set:
@@ -171,11 +170,13 @@ def paramiko_sftp(
     actions = {"put": put, "get": get}
     client = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
     scp_client = SCPClient(client.get_transport())
-    sftp_client = paramiko.SFTPClient.from_transport(client.get_transport())
-    assert sftp_client is not None
-    files_changed = actions[action](
-        task, scp_client, sftp_client, src, dst, dry_run, compare
+    sftp_client = (
+        paramiko.SFTPClient.from_transport(client.get_transport())
+        if compare is True
+        else None
     )
+    assert sftp_client is not None
+    files_changed = actions[action](task, scp_client, sftp_client, src, dst, dry_run)
     return Result(
         host=task.host, changed=bool(files_changed), files_changed=files_changed
     )
