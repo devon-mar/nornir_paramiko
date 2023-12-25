@@ -82,8 +82,9 @@ jobs:
         working-directory: tests
 
       - name: Wait for containers to start
+        working-directory: tests
         run: |
-          SSH_PORTS="2222 2223"
+          SSH_PORTS="2222 2223 2224"
           for p in $SSH_PORTS; do
             echo "::group::Wait for container $p to start"
             for i in {1..20}; do ssh-keyscan -p $p localhost && break || echo -e "\033[0;33mNot started yet ($i)\033[0m" && sleep 1; done
@@ -98,6 +99,11 @@ jobs:
 
       - name: Run tests
         run: poetry run pytest -v tests
+
+      - name: Show Docker logs
+        if: ${{ always() }}
+        run: docker-compose logs
+        working-directory: tests
 
   docs:
     runs-on: ubuntu-latest

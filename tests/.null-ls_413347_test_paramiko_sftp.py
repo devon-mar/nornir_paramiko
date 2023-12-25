@@ -111,7 +111,7 @@ def test_paramiko_sftp_dry_run(host: str, nr_dry_run: Nornir, temp_dir: Path) ->
     assert result.failed is True  # because the file wasn't written
 
 
-def test_paramiko_scp_only_host_dry_run(nr_dry_run: Nornir, temp_dir: Path) -> None:
+def test_paramiko_scp_only_host(nr_dry_run: Nornir, temp_dir: Path) -> None:
     host = "alpinescp"
     nr_filtered = nr_dry_run.filter(name=host)
 
@@ -135,57 +135,8 @@ def test_paramiko_scp_only_host_dry_run(nr_dry_run: Nornir, temp_dir: Path) -> N
     assert len(result[host]) == 1
     host_result = result[host][0]
     assert host_result.changed is True
-    assert host_result.files_changed == [str(test_put_file)]
+    assert host_result.files_changed == [host_file]
 
     # Check that the file was not written
     result = nr_filtered.run(task=paramiko_command, command=f"test -f '{host_file}'")
-    assert result.failed is True  # because the file wasn't written
-
-
-def test_paramiko_scp_only_host(nr: Nornir, temp_dir: Path) -> None:
-    host = "alpinescp"
-    nr_filtered = nr.filter(name=host)
-
-    test_content = random_str(20)
-
-    host_file = f"/tmp/test_{random_str(5)}"
-
-    test_put_file = temp_dir.joinpath("test_put")
-
-    with open(test_put_file, "wt") as f:
-        f.write(test_content)
-    result = nr_filtered.run(
-        task=paramiko_sftp,
-        action="put",
-        src=str(test_put_file),
-        dst=host_file,
-        compare=False,
-    )
-
-    assert result.failed is False
-    assert len(result[host]) == 1
-    host_result = result[host][0]
-    assert host_result.changed is True
-    assert host_result.files_changed == [str(test_put_file)]
-
-    # Check that the file was written
-    result = nr_filtered.run(task=paramiko_command, command=f"test -f '{host_file}'")
-    assert result.failed is False
-
-
-def test_paramiko_scp_only_host_compare(nr: Nornir, temp_dir: Path) -> None:
-    host = "alpinescp"
-    nr_filtered = nr.filter(name=host)
-
-    host_file = f"/tmp/test_{random_str(5)}"
-
-    test_put_file = temp_dir.joinpath("test_put")
-
-    result = nr_filtered.run(
-        task=paramiko_sftp,
-        action="put",
-        src=str(test_put_file),
-        dst=host_file,
-        compare=True,
-    )
-    assert result.failed is True  # host does not support SFTp
+    assert result.failed is False  # because the file wasn't written

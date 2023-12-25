@@ -34,4 +34,6 @@ def nr_dry_run():
 
 
 def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
+    if "host" not in metafunc.fixturenames:
+        return
     metafunc.parametrize("host", ("password", "key"))

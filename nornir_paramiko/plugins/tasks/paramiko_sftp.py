@@ -175,7 +175,8 @@ def paramiko_sftp(
         if compare is True
         else None
     )
-    assert sftp_client is not None
+    if compare is True:
+        assert sftp_client is not None
     files_changed = actions[action](task, scp_client, sftp_client, src, dst, dry_run)
     return Result(
         host=task.host, changed=bool(files_changed), files_changed=files_changed

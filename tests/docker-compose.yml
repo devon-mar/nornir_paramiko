@@ -17,3 +17,10 @@ services:
       PUBLIC_KEY: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEq2cLqs++uwJh6xLTy4nX20UDfbgb6cDZl2nNkJEKud
     ports:
       - 2223:2222
+  alpinescp:
+    image: alpinescp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "2224:22"
