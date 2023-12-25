@@ -3,6 +3,7 @@ name = "nornir_paramiko"
 version = "0.3.0"
 description = ""
 authors = ["Devon Mar <devonm@mdmm.ca>"]
+readme = "README.md"
 
 [tool.poetry.plugins."nornir.plugins.connections"]
 "paramiko" = "nornir_paramiko.plugins.connections:Paramiko"
