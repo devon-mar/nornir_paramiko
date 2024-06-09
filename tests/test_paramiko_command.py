@@ -1,4 +1,3 @@
-import pytest
 from nornir.core import Nornir
 
 from nornir_paramiko.plugins.tasks import paramiko_command
