@@ -32,7 +32,7 @@ def test_paramiko_sftp(host: str, nr: Nornir, temp_dir: Path) -> None:
 
     test_put_file = temp_dir.joinpath("test_put")
 
-    with open(test_put_file, "wt") as f:
+    with open(test_put_file, "w") as f:
         f.write(test_content)
     result = nr_filtered.run(
         task=paramiko_sftp, action="put", src=str(test_put_file), dst=host_file
@@ -56,7 +56,7 @@ def test_paramiko_sftp(host: str, nr: Nornir, temp_dir: Path) -> None:
 
     # Now change the content then put
     test_content += "a"
-    with open(test_put_file, "wt") as f:
+    with open(test_put_file, "w") as f:
         f.write(test_content)
     result = nr_filtered.run(
         task=paramiko_sftp, action="put", src=str(test_put_file), dst=host_file
@@ -80,7 +80,7 @@ def test_paramiko_sftp(host: str, nr: Nornir, temp_dir: Path) -> None:
     assert host_result.changed is True
     assert host_result.files_changed == [str(test_get_file)]
 
-    with open(test_get_file, "rt") as f:
+    with open(test_get_file) as f:
         have_content = f.read()
     assert have_content == test_content
 
@@ -94,7 +94,7 @@ def test_paramiko_sftp_dry_run(host: str, nr_dry_run: Nornir, temp_dir: Path) ->
 
     test_put_file = temp_dir.joinpath("test_put")
 
-    with open(test_put_file, "wt") as f:
+    with open(test_put_file, "w") as f:
         f.write(test_content)
     result = nr_filtered.run(
         task=paramiko_sftp, action="put", src=str(test_put_file), dst=host_file
@@ -121,7 +121,7 @@ def test_paramiko_scp_only_host_dry_run(nr_dry_run: Nornir, temp_dir: Path) -> N
 
     test_put_file = temp_dir.joinpath("test_put")
 
-    with open(test_put_file, "wt") as f:
+    with open(test_put_file, "w") as f:
         f.write(test_content)
     result = nr_filtered.run(
         task=paramiko_sftp,
@@ -152,7 +152,7 @@ def test_paramiko_scp_only_host(nr: Nornir, temp_dir: Path) -> None:
 
     test_put_file = temp_dir.joinpath("test_put")
 
-    with open(test_put_file, "wt") as f:
+    with open(test_put_file, "w") as f:
         f.write(test_content)
     result = nr_filtered.run(
         task=paramiko_sftp,

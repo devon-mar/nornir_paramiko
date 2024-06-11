@@ -25,7 +25,7 @@ def get_src_hash(filename: str) -> str:
 
 
 def get_dst_hash(task: Task, filename: str) -> str:
-    command = "sha1sum {}".format(filename)
+    command = f"sha1sum {filename}"
     try:
         result = paramiko_command(task, command)
         if result.stdout is not None:
@@ -45,7 +45,7 @@ def remote_exists(sftp_client: paramiko.SFTPClient, f: str) -> bool:
         sftp_client.stat(f)
         return True
 
-    except IOError:
+    except OSError:
         return False
 
 
@@ -57,7 +57,7 @@ def compare_put_files(
         src_hash = get_src_hash(src)
         try:
             dst_hash = get_dst_hash(task, dst)
-        except IOError:
+        except OSError:
             dst_hash = ""
         if src_hash != dst_hash:
             changed.append(dst)
@@ -83,7 +83,7 @@ def compare_get_files(
         src_hash = get_dst_hash(task, src)
         try:
             dst_hash = get_src_hash(dst)
-        except IOError:
+        except OSError:
             dst_hash = ""
         if src_hash != dst_hash:
             changed.append(dst)
@@ -163,7 +163,7 @@ def paramiko_sftp(
                 files.sftp,
                 action="put",
                 src="README.md",
-                dst="/tmp/README.md"
+                dst="/tmp/README.md",
             )
     """
     dry_run = task.is_dry_run(dry_run)
