@@ -10,7 +10,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-paramiko = "^2.7"
+paramiko = "^4.0"
 nornir = "^3.0.0"
 scp = ">=0.13.3,<0.15.0"
 
