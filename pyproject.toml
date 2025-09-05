@@ -9,7 +9,7 @@ readme = "README.md"
 "paramiko" = "nornir_paramiko.plugins.connections:Paramiko"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.9"
 paramiko = "^2.7"
 nornir = "^3.0.0"
 scp = ">=0.13.3,<0.15.0"
