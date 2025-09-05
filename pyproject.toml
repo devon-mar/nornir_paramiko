@@ -20,7 +20,7 @@ Sphinx = "^5.3.0"
 sphinx-rtd-theme = "^2.0.0"
 sphinx-autodoc-typehints = { version = "^1.22", python = "^3.7" }
 mypy = "^0.971"
-types-paramiko = "^2.11.6"
+types-paramiko = "^4.0.0"
 ruff = { version = "^0.12", python = "^3.7" }
 
 [build-system]
