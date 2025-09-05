@@ -1,5 +1,5 @@
 import os
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 
 import paramiko
 from nornir.core.configuration import Config
@@ -23,7 +23,7 @@ class Paramiko:
         password: Optional[str],
         port: Optional[int],
         platform: Optional[str],
-        extras: Optional[Dict[str, Any]] = None,
+        extras: Optional[dict[str, Any]] = None,
         configuration: Optional[Config] = None,
     ) -> None:
         if hostname is None:
@@ -41,7 +41,7 @@ class Paramiko:
         if os.path.exists(ssh_config_file):
             with open(ssh_config_file) as f:
                 ssh_config.parse(f)
-        parameters: Dict[str, Any] = {
+        parameters: dict[str, Any] = {
             "hostname": hostname,
             "username": username,
             "password": password,

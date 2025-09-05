@@ -1,7 +1,7 @@
 import hashlib
 import os
 import stat
-from typing import List, Literal, Optional
+from typing import Literal, Optional
 
 import paramiko
 from nornir.core.task import Result, Task
@@ -51,7 +51,7 @@ def remote_exists(sftp_client: paramiko.SFTPClient, f: str) -> bool:
 
 def compare_put_files(
     task: Task, sftp_client: paramiko.SFTPClient, src: str, dst: str
-) -> List[str]:
+) -> list[str]:
     changed = []
     if os.path.isfile(src):
         src_hash = get_src_hash(src)
@@ -74,7 +74,7 @@ def compare_put_files(
 
 def compare_get_files(
     task: Task, sftp_client: paramiko.SFTPClient, src: str, dst: str
-) -> List[str]:
+) -> list[str]:
     changed = []
     st_mode = sftp_client.stat(src).st_mode
     assert st_mode is not None
@@ -105,7 +105,7 @@ def get(
     src: str,
     dst: str,
     dry_run: Optional[bool] = None,
-) -> List[str]:
+) -> list[str]:
     if sftp_client is not None:
         changed = compare_get_files(task, sftp_client, src, dst)
     else:
@@ -122,7 +122,7 @@ def put(
     src: str,
     dst: str,
     dry_run: Optional[bool] = None,
-) -> List[str]:
+) -> list[str]:
     if sftp_client is not None:
         changed = compare_put_files(task, sftp_client, src, dst)
     else:
