@@ -12,7 +12,7 @@ readme = "README.md"
 python = "^3.9"
 paramiko = "^4.0"
 nornir = "^3.0.0"
-scp = ">=0.13.3,<0.15.0"
+scp = ">=0.13.3,<0.16.0"
 
 [tool.poetry.dev-dependencies]
 pytest = { version = "^7.2.0", python = "^3.7.2" }
