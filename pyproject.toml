@@ -19,7 +19,7 @@ pytest = { version = "^8.4.2", python = "^3.7.2" }
 Sphinx = "^7.3.7"
 sphinx-rtd-theme = "^2.0.0"
 sphinx-autodoc-typehints = { version = "^1.22", python = "^3.7" }
-mypy = "^1.17"
+mypy = "^1.18"
 types-paramiko = "^4.0.0"
 ruff = { version = "^0.12", python = "^3.7" }
 
