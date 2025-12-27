@@ -18,13 +18,13 @@ class Paramiko:
 
     def open(
         self,
-        hostname: Optional[str],
-        username: Optional[str],
-        password: Optional[str],
-        port: Optional[int],
-        platform: Optional[str],
-        extras: Optional[dict[str, Any]] = None,
-        configuration: Optional[Config] = None,
+        hostname: str | None,
+        username: str | None,
+        password: str | None,
+        port: int | None,
+        platform: str | None,
+        extras: dict[str, Any] | None = None,
+        configuration: Config | None = None,
     ) -> None:
         if hostname is None:
             raise ValueError("hostname must not be none")

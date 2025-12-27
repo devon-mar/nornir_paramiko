@@ -1,7 +1,7 @@
 import hashlib
 import os
 import stat
-from typing import Literal, Optional
+from typing import Literal
 
 import paramiko
 from nornir.core.task import Result, Task
@@ -101,10 +101,10 @@ def compare_get_files(
 def get(
     task: Task,
     scp_client: SCPClient,
-    sftp_client: Optional[paramiko.SFTPClient],
+    sftp_client: paramiko.SFTPClient | None,
     src: str,
     dst: str,
-    dry_run: Optional[bool] = None,
+    dry_run: bool | None = None,
 ) -> list[str]:
     if sftp_client is not None:
         changed = compare_get_files(task, sftp_client, src, dst)
@@ -118,10 +118,10 @@ def get(
 def put(
     task: Task,
     scp_client: SCPClient,
-    sftp_client: Optional[paramiko.SFTPClient],
+    sftp_client: paramiko.SFTPClient | None,
     src: str,
     dst: str,
-    dry_run: Optional[bool] = None,
+    dry_run: bool | None = None,
 ) -> list[str]:
     if sftp_client is not None:
         changed = compare_put_files(task, sftp_client, src, dst)
@@ -137,7 +137,7 @@ def paramiko_sftp(
     src: str,
     dst: str,
     action: Literal["get", "put"],
-    dry_run: Optional[bool] = None,
+    dry_run: bool | None = None,
     compare: bool = True,
 ) -> Result:
     """
