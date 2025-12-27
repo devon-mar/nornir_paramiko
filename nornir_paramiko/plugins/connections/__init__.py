@@ -1,5 +1,5 @@
 import os
-from typing import Any, Optional
+from typing import Any
 
 import paramiko
 from nornir.core.configuration import Config
